@@ -1,14 +1,25 @@
+"""LeetCode Problem 2: Add Two Numbers solution."""
+
 from typing import Optional
 
 
 # Definition for singly-linked list.
 class ListNode:
+    """Singly-linked list node."""
+
     def __init__(self, val=0, next=None):
+        """
+        Initialize a list node.
+
+        Args:
+            val: Node value.
+            next: Next node in the list.
+        """
         self.val = val
         self.next = next
 
     def __eq__(self, other):
-        """Helper for testing - compare two linked lists."""
+        """Compare two linked lists for equality."""
         if not isinstance(other, ListNode):
             return False
         current_self = self
@@ -22,7 +33,11 @@ class ListNode:
 
     @staticmethod
     def from_list(values):
-        """Helper to create ListNode from list [2,4,3] -> ListNode(2)->ListNode(4)->ListNode(3)"""
+        """
+        Create ListNode from list.
+
+        Example: [2,4,3] -> ListNode(2)->ListNode(4)->ListNode(3)
+        """
         if not values:
             return None
         head = ListNode(values[0])
@@ -33,7 +48,7 @@ class ListNode:
         return head
 
     def to_list(self):
-        """Helper to convert ListNode to list."""
+        """Convert ListNode to list."""
         result = []
         current = self
         while current:
@@ -43,6 +58,8 @@ class ListNode:
 
 
 class Solution:
+    """Solution class for Add Two Numbers problem."""
+
     def addTwoNumbers(
         self, l1: Optional[ListNode], l2: Optional[ListNode]
     ) -> Optional[ListNode]:
@@ -50,11 +67,11 @@ class Solution:
         Add two numbers represented as linked lists.
 
         Args:
-            l1: First number as linked list (digits in reverse order)
-            l2: Second number as linked list (digits in reverse order)
+            l1: First number as linked list (digits in reverse order).
+            l2: Second number as linked list (digits in reverse order).
 
         Returns:
-            Sum as linked list (digits in reverse order)
+            Sum as linked list (digits in reverse order).
         """
         dummy = ListNode(0)
         current = dummy

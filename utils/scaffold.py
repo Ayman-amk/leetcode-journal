@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """
+Problem scaffolding tool.
+
 Usage:
     python utils/scaffold.py 0001-two-sum
 
@@ -21,6 +23,12 @@ import yaml
 
 
 def create_folder_structure(problem_id_slug: str):
+    """
+    Create folder structure for a new LeetCode problem.
+
+    Args:
+        problem_id_slug: Problem identifier in format "0001-two-sum".
+    """
     problems_dir = os.path.join(os.getcwd(), "problems")
     root = os.path.join(problems_dir, problem_id_slug)
     if os.path.exists(root):
@@ -36,9 +44,9 @@ def create_folder_structure(problem_id_slug: str):
     # README.md
     readme_content = f"""# {problem_id_slug.replace('-', ' ').title()}
 
-**Link:** https://leetcode.com/problems/{problem_id_slug.split('-', 1)[1]}/  
-**Difficulty:**  
-**Tags:**  
+**Link:** https://leetcode.com/problems/{problem_id_slug.split('-', 1)[1]}/
+**Difficulty:**
+**Tags:**
 
 ---
 
@@ -49,12 +57,12 @@ Write your thought process here.
 Explain step-by-step how you solved it.
 
 ### Complexity
-- **Time:** 
-- **Space:** 
+- **Time:**
+- **Space:**
 
 ### Example
-Input:  
-Output:  
+Input:
+Output:
 
 ---
 
@@ -124,6 +132,7 @@ int main() {
 
 
 def main():
+    """Main entry point for the scaffold script."""
     if len(sys.argv) != 2:
         print("Usage: python utils/scaffold.py <problem_id-slug>")
         sys.exit(1)

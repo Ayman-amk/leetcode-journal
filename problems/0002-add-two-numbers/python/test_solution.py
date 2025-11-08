@@ -1,8 +1,10 @@
+"""Test cases for Add Two Numbers problem."""
+
 from solution import Solution, ListNode
 
 
 def test_example_1():
-    """Test case from LeetCode: [2,4,3] + [5,6,4] = [7,0,8]"""
+    """Test case from LeetCode: [2,4,3] + [5,6,4] = [7,0,8]."""
     solver = Solution()
     l1 = ListNode.from_list([2, 4, 3])
     l2 = ListNode.from_list([5, 6, 4])
@@ -14,7 +16,7 @@ def test_example_1():
 
 
 def test_example_2():
-    """Test case from LeetCode: [0] + [0] = [0]"""
+    """Test case from LeetCode: [0] + [0] = [0]."""
     solver = Solution()
     l1 = ListNode.from_list([0])
     l2 = ListNode.from_list([0])
@@ -26,7 +28,7 @@ def test_example_2():
 
 
 def test_example_3():
-    """Test case from LeetCode: [9,9,9,9,9,9,9] + [9,9,9,9] = [8,9,9,9,0,0,0,1]"""
+    """Test case: [9,9,9,9,9,9,9] + [9,9,9,9] = [8,9,9,9,0,0,0,1]."""
     solver = Solution()
     l1 = ListNode.from_list([9, 9, 9, 9, 9, 9, 9])
     l2 = ListNode.from_list([9, 9, 9, 9])
@@ -38,7 +40,7 @@ def test_example_3():
 
 
 def test_different_lengths():
-    """Test with lists of different lengths"""
+    """Test with lists of different lengths."""
     solver = Solution()
     l1 = ListNode.from_list([1, 8])
     l2 = ListNode.from_list([0])
@@ -50,7 +52,7 @@ def test_different_lengths():
 
 
 def test_carry_over():
-    """Test carry-over scenarios"""
+    """Test carry-over scenarios."""
     solver = Solution()
     l1 = ListNode.from_list([5])
     l2 = ListNode.from_list([5])
@@ -62,6 +64,7 @@ def test_carry_over():
 
 
 def test_all():
+    """Run all test cases."""
     test_example_1()
     test_example_2()
     test_example_3()
