@@ -6,8 +6,12 @@
 
 ## Two Pointers
 
-- (WIP next)
+- 0003-longest-substring-without-repeating-characters
 
 ## Sliding Window
 
-- (WIP next)
+- 0003-longest-substring-without-repeating-characters
+
+## Hash Table
+
+- 0003-longest-substring-without-repeating-characters

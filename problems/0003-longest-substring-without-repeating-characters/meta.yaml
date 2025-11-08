@@ -1,0 +1,13 @@
+id: 3
+slug: longest-substring-without-repeating-characters
+difficulty: Medium
+patterns:
+  - Sliding Window
+  - Hash Table
+  - Two Pointers
+languages:
+  - python
+  - cpp
+  - js
+status: completed
+last_update: '2025-11-08'
