@@ -45,12 +45,23 @@ jobs:
         run: |
           flake8 problems/ utils/ src/ --max-line-length=88 --extend-ignore=E203,W503
       
-      - name: Clean Python cache
+      - name: Clean Python cache (Linux/macOS)
+        if: runner.os != 'Windows'
+        shell: bash
         run: |
           find problems -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
           find problems -name "*.pyc" -delete 2>/dev/null || true
       
-      - name: Run Python tests
+      - name: Clean Python cache (Windows)
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          Get-ChildItem -Path problems -Recurse -Directory -Filter __pycache__ | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+          Get-ChildItem -Path problems -Recurse -Filter *.pyc | Remove-Item -Force -ErrorAction SilentlyContinue
+      
+      - name: Run Python tests (Linux/macOS)
+        if: runner.os != 'Windows'
+        shell: bash
         run: |
           python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || \
           for test_file in problems/*/python/test_solution.py; do
@@ -58,6 +69,20 @@ jobs:
               cd "$(dirname "$test_file")" && python -m pytest test_solution.py -v --tb=short && cd - > /dev/null
             fi
           done
+      
+      - name: Run Python tests (Windows)
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test"
+          if ($LASTEXITCODE -ne 0) {
+            Get-ChildItem -Path problems -Recurse -Filter test_solution.py | ForEach-Object {
+              $testDir = $_.DirectoryName
+              Push-Location $testDir
+              python -m pytest test_solution.py -v --tb=short
+              Pop-Location
+            }
+          }
       
       - name: Generate coverage report
         run: |
