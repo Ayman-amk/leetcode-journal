@@ -1,16 +1,19 @@
+# =============================================================================
 # Python
+# =============================================================================
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
 .Python
-.venv/
-env/
-venv/
-ENV/
+*.so
+*.egg
+*.egg-info/
+.installed.cfg
+*.egg-info
+dist/
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -20,11 +23,25 @@ parts/
 sdist/
 var/
 wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+.mypy_cache/
+.dmypy.json
+dmypy.json
 
-# C++
+# =============================================================================
+# C/C++
+# =============================================================================
 *.exe
 *.out
 *.obj
@@ -34,38 +51,62 @@ wheels/
 *.dylib
 *.dll
 test
+test.exe
+*.dSYM/
 
-# Node
+# =============================================================================
+# Node.js
+# =============================================================================
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+yarn.lock
 
-# IDE
+# =============================================================================
+# IDEs and Editors
+# =============================================================================
 # Note: .vscode/ is committed for shared workspace settings
 .idea/
 *.swp
 *.swo
 *~
+.vscode/settings.json.local
+.vscode/tasks.json.local
 
-# OS
+# =============================================================================
+# OS Files
+# =============================================================================
 .DS_Store
-Thumbs.db
 .DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
 
-# Coverage
-.coverage
-htmlcov/
-.pytest_cache/
-.tox/
-.hypothesis/
-
-# MyPy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Environment
+# =============================================================================
+# Environment and Secrets
+# =============================================================================
 .env
 .env.local
+.env.*.local
+*.key
+*.pem
+secrets/
 
+# =============================================================================
+# Build and Cache
+# =============================================================================
+.cache/
+*.log
+*.tmp
+*.temp
+
+# =============================================================================
+# CI/CD Artifacts
+# =============================================================================
+.ci/
+artifacts/

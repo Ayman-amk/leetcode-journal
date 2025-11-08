@@ -23,12 +23,23 @@ leetcode-journal/
 │       ├── README.md      # Problem analysis
 │       ├── meta.yaml      # Structured metadata
 │       └── <language>/    # Language-specific implementations
+├── docs/                  # Documentation
+│   ├── DEVELOPER_GUIDE.md # This file
+│   ├── PATTERNS.md        # Pattern index
+│   └── PROGRESS.md        # Progress tracking
 ├── utils/                 # Utility scripts
 │   └── scaffold.py        # Problem scaffolding tool
-├── src/                   # Internal scripts (future use)
+├── scripts/               # Automation scripts
+│   ├── run_all_tests.sh   # Run all tests
+│   └── format_all.sh      # Format all code
+├── src/                   # Internal scripts & helpers
+├── config/                # Configuration files
+│   └── pyproject.toml     # Python tool config
+├── templates/             # Code templates
 ├── .gitlab-ci.yml         # GitLab CI/CD pipeline
-├── .github/workflows/     # GitHub Actions (optional)
-└── .vscode/               # Editor configuration
+├── .github/workflows/     # GitHub Actions
+├── .vscode/               # Editor configuration
+└── Makefile               # Build automation
 ```
 
 ### Problem Folder Structure
@@ -343,13 +354,15 @@ Pre-configured tasks in `.vscode/tasks.json`:
 ## Best Practices
 
 1. **Always write tests** before or alongside implementation
-2. **Run tests locally** before pushing
+2. **Run tests locally** before pushing (use `make test` or `scripts/run_all_tests.sh`)
 3. **Follow naming conventions:** Use kebab-case for problem folders, snake_case for Python, camelCase for C++
 4. **Document your approach** in README.md
 5. **Update metadata** when completing a problem
-6. **Keep solutions clean** - no debug code, no commented-out solutions
-7. **Use meaningful variable names**
-8. **Add complexity analysis** to README.md
+6. **Update docs/PATTERNS.md** if introducing new patterns
+7. **Keep solutions clean** - no debug code, no commented-out solutions
+8. **Use meaningful variable names**
+9. **Add complexity analysis** to README.md
+10. **Use Makefile commands** for common tasks (see root Makefile)
 
 ## Contributing
 
