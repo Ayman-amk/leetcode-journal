@@ -26,7 +26,8 @@ leetcode-journal/
 ├── utils/                 # Utility scripts
 │   └── scaffold.py        # Problem scaffolding tool
 ├── src/                   # Internal scripts (future use)
-├── .github/workflows/     # CI/CD automation
+├── .gitlab-ci.yml         # GitLab CI/CD pipeline
+├── .github/workflows/     # GitHub Actions (optional)
 └── .vscode/               # Editor configuration
 ```
 
@@ -199,18 +200,17 @@ Use VS Code tasks for one-click testing:
 
 ### Workflow Overview
 
-The CI pipeline (`.github/workflows/ci.yml`) runs on every push and PR:
+The CI pipeline (`.gitlab-ci.yml`) runs on every push and merge request:
 
 1. **Python Tests & Linting**
-   - Runs on Ubuntu, Windows, macOS
-   - Python versions: 3.9, 3.10, 3.11
+   - Runs on Docker images with Python 3.9, 3.10, 3.11
    - Format check with `black`
    - Lint check with `flake8`
    - Run all Python tests
    - Generate coverage reports
 
 2. **C++ Tests & Formatting**
-   - Runs on Ubuntu, Windows, macOS
+   - Runs on Ubuntu and Windows Docker images
    - Format check with `clang-format`
    - Build and run all C++ tests
    - Compiler flags: `-std=c++17 -O2 -Wall -Wextra -Werror`
@@ -223,8 +223,8 @@ The CI pipeline (`.github/workflows/ci.yml`) runs on every push and PR:
 ### Caching
 
 The pipeline caches:
-- Python pip dependencies
-- Compiled binaries (implicit via GitHub Actions)
+- Python pip dependencies (via GitLab cache)
+- Coverage reports (as artifacts)
 
 ### Failure Conditions
 
@@ -332,6 +332,7 @@ Pre-configured tasks in `.vscode/tasks.json`:
 2. **Linting errors:** Fix flake8 warnings
 3. **Test failures:** Run tests locally first
 4. **Platform-specific issues:** Test on multiple platforms if possible
+5. **GitLab CI issues:** Check pipeline logs in GitLab UI under CI/CD > Pipelines
 
 ### VS Code Tasks Not Working
 

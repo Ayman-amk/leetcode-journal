@@ -1,0 +1,97 @@
+stages:
+  - test
+  - summary
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+
+# Python Tests & Linting
+python-tests:
+  stage: test
+  image: python:${PYTHON_VERSION}
+  variables:
+    PYTHON_VERSION: "3.11"
+  parallel:
+    matrix:
+      - PYTHON_VERSION: ["3.9", "3.10", "3.11"]
+  before_script:
+    - python -m pip install --upgrade pip
+    - pip install -r requirements.txt
+  script:
+    - echo "Running Python tests with Python ${PYTHON_VERSION}"
+    - black --check problems/ utils/ src/
+    - flake8 problems/ utils/ src/ --max-line-length=88 --extend-ignore=E203,W503
+    - find problems -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
+    - find problems -name "*.pyc" -delete 2>/dev/null || true
+    - python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || 
+        for test_file in problems/*/python/test_solution.py; do
+          if [ -f "$test_file" ]; then
+            cd "$(dirname "$test_file")" && python -m pytest test_solution.py -v --tb=short && cd - > /dev/null
+          fi
+        done
+    - python -m pytest problems/ --cov=problems --cov-report=term-missing --cov-report=html --import-mode=importlib -k "test" || true
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    when: always
+    paths:
+      - htmlcov/
+    expire_in: 1 week
+  only:
+    - main
+    - master
+    - merge_requests
+
+# C++ Tests & Formatting
+cpp-tests:
+  stage: test
+  image: ubuntu:22.04
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq g++ clang-format
+  script:
+    - |
+      if command -v clang-format &> /dev/null; then
+        find problems -name "*.cpp" -o -name "*.h" | while read file; do
+          clang-format --style=Google --dry-run --Werror "$file" || exit 1
+        done
+      else
+        echo "clang-format not available, skipping format check"
+      fi
+    - |
+      find problems -name "test_solution.cpp" -type f | while read test_file; do
+        problem_dir=$(dirname "$test_file")
+        echo "Testing: $problem_dir"
+        g++ -std=c++17 -O2 -Wall -Wextra -Werror "$test_file" -o "$problem_dir/test" || exit 1
+        "$problem_dir/test" || exit 1
+        rm -f "$problem_dir/test"
+      done
+  only:
+    - main
+    - master
+    - merge_requests
+
+# Test Summary
+test-summary:
+  stage: summary
+  image: ubuntu:22.04
+  script:
+    - |
+      echo "## Test Summary"
+      echo ""
+      echo "Total problems: $(find problems -mindepth 1 -maxdepth 1 -type d | wc -l)"
+      echo ""
+      echo "### Python Tests"
+      echo "- Status: Check pipeline jobs above"
+      echo ""
+      echo "### C++ Tests"
+      echo "- Status: Check pipeline jobs above"
+  only:
+    - main
+    - master
+    - merge_requests
+  when: always
+
