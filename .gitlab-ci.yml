@@ -9,20 +9,77 @@ cache:
   paths:
     - .cache/pip
 
-# Python Tests & Linting
-python-tests:
+# Python Tests & Linting - Python 3.9
+python-tests-3.9:
   stage: test
-  image: python:${PYTHON_VERSION}
-  variables:
-    PYTHON_VERSION: "3.11"
-  parallel:
-    matrix:
-      - PYTHON_VERSION: ["3.9", "3.10", "3.11"]
+  image: python:3.9
   before_script:
     - python -m pip install --upgrade pip
     - pip install -r requirements.txt
   script:
-    - echo "Running Python tests with Python ${PYTHON_VERSION}"
+    - echo "Running Python tests with Python 3.9"
+    - black --check problems/ utils/ src/
+    - flake8 problems/ utils/ src/ --max-line-length=88 --extend-ignore=E203,W503
+    - find problems -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
+    - find problems -name "*.pyc" -delete 2>/dev/null || true
+    - python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || 
+        for test_file in problems/*/python/test_solution.py; do
+          if [ -f "$test_file" ]; then
+            cd "$(dirname "$test_file")" && python -m pytest test_solution.py -v --tb=short && cd - > /dev/null
+          fi
+        done
+    - python -m pytest problems/ --cov=problems --cov-report=term-missing --cov-report=html --import-mode=importlib -k "test" || true
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    when: always
+    paths:
+      - htmlcov/
+    expire_in: 1 week
+  only:
+    - main
+    - master
+    - merge_requests
+
+# Python Tests & Linting - Python 3.10
+python-tests-3.10:
+  stage: test
+  image: python:3.10
+  before_script:
+    - python -m pip install --upgrade pip
+    - pip install -r requirements.txt
+  script:
+    - echo "Running Python tests with Python 3.10"
+    - black --check problems/ utils/ src/
+    - flake8 problems/ utils/ src/ --max-line-length=88 --extend-ignore=E203,W503
+    - find problems -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
+    - find problems -name "*.pyc" -delete 2>/dev/null || true
+    - python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || 
+        for test_file in problems/*/python/test_solution.py; do
+          if [ -f "$test_file" ]; then
+            cd "$(dirname "$test_file")" && python -m pytest test_solution.py -v --tb=short && cd - > /dev/null
+          fi
+        done
+    - python -m pytest problems/ --cov=problems --cov-report=term-missing --cov-report=html --import-mode=importlib -k "test" || true
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    when: always
+    paths:
+      - htmlcov/
+    expire_in: 1 week
+  only:
+    - main
+    - master
+    - merge_requests
+
+# Python Tests & Linting - Python 3.11
+python-tests-3.11:
+  stage: test
+  image: python:3.11
+  before_script:
+    - python -m pip install --upgrade pip
+    - pip install -r requirements.txt
+  script:
+    - echo "Running Python tests with Python 3.11"
     - black --check problems/ utils/ src/
     - flake8 problems/ utils/ src/ --max-line-length=88 --extend-ignore=E203,W503
     - find problems -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
@@ -94,4 +151,3 @@ test-summary:
     - master
     - merge_requests
   when: always
-
