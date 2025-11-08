@@ -52,11 +52,16 @@ jobs:
       
       - name: Run Python tests
         run: |
-          python -m pytest problems/ -v --tb=short -k "test_solution" || python -m pytest problems/*/python/test_solution.py -v --tb=short
+          python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || \
+          for test_file in problems/*/python/test_solution.py; do
+            if [ -f "$test_file" ]; then
+              cd "$(dirname "$test_file")" && python -m pytest test_solution.py -v --tb=short && cd - > /dev/null
+            fi
+          done
       
       - name: Generate coverage report
         run: |
-          python -m pytest problems/ --cov=problems --cov-report=term-missing --cov-report=html -k "test_solution" || true
+          python -m pytest problems/ --cov=problems --cov-report=term-missing --cov-report=html --import-mode=importlib -k "test" || true
       
       - name: Upload coverage to artifacts
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
