@@ -1,12 +1,12 @@
 # 0001. Two Sum
 
 **Link:** [LeetCode Problem](https://leetcode.com/problems/two-sum/)  
-**Difficulty:** 🟢 Easy  
+**Difficulty:** Easy  
 **Tags:** Hash Map, Array, One-Pass
 
 ---
 
-### 🧠 Intuition
+### Intuition
 
 We need two distinct indices `i` and `j` such that `nums[i] + nums[j] == target`.  
 A brute-force approach checks all pairs in O(n²) — too slow.  
@@ -15,7 +15,7 @@ allowing instant complement lookup in O(1).
 
 ---
 
-### ⚙️ Approach
+### Approach
 
 - Initialize an empty hash map `seen`.
 - Iterate through the array:
@@ -26,7 +26,7 @@ allowing instant complement lookup in O(1).
 
 ---
 
-### 📈 Complexity
+### Complexity
 
 | Metric    | Value | Notes                       |
 | :-------- | :---- | :-------------------------- |
@@ -35,7 +35,7 @@ allowing instant complement lookup in O(1).
 
 ---
 
-### 🧪 Implementations & Tests
+### Implementations & Tests
 
 | Language       | File                                         | Tested | Notes                          |
 | -------------- | -------------------------------------------- | ------ | ------------------------------ |
@@ -48,7 +48,7 @@ allowing instant complement lookup in O(1).
 
 ---
 
-### 🧩 Example
+### Example
 
 **Input:**  
 `nums = [2, 7, 11, 15], target = 9`  
@@ -58,7 +58,7 @@ allowing instant complement lookup in O(1).
 
 ---
 
-### 🧠 Notes
+### Notes
 
 - `unordered_map` (C++) and `dict` (Python) provide O(1) average lookup.
 - Always prefer one-pass solution: less memory churn, earlier return.

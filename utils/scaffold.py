@@ -20,7 +20,7 @@ import yaml
 def create_folder_structure(problem_id_slug: str):
     root = os.path.join(os.getcwd(), problem_id_slug)
     if os.path.exists(root):
-        print(f"[⚠️] Folder '{problem_id_slug}' already exists.")
+        print(f"Folder '{problem_id_slug}' already exists.")
         return
 
     # Create base folders
@@ -38,17 +38,17 @@ def create_folder_structure(problem_id_slug: str):
 
 ---
 
-### 🧠 Intuition
+### Intuition
 Write your thought process here.
 
-### ⚙️ Approach
+### Approach
 Explain step-by-step how you solved it.
 
-### 📈 Complexity
+### Complexity
 - **Time:** 
 - **Space:** 
 
-### 🧪 Example
+### Example
 Input:  
 Output:  
 
@@ -78,7 +78,7 @@ Output:
         with open(os.path.join(root, lang, f"solution.{ext}"), "w", encoding="utf-8") as f:
             f.write(f"# {problem_id_slug} solution in {lang}\n")
 
-    print(f"[✅] Scaffold created successfully for '{problem_id_slug}'")
+    print(f"Scaffold created successfully for '{problem_id_slug}'")
 
 def main():
     if len(sys.argv) != 2:
