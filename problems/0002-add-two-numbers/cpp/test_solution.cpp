@@ -109,7 +109,7 @@ void test_different_lengths() {
   ListNode* expected = createList({1, 8});
 
   assert(compareLists(result, expected) &&
-         "Test 4 failed: Different lengths");
+         "Test 4 failed: Different lengths");  // NOLINT
 
   deleteList(l1);
   deleteList(l2);
@@ -126,7 +126,7 @@ void test_carry_over() {
   ListNode* expected = createList({0, 1});
 
   assert(compareLists(result, expected) &&
-         "Test 5 failed: Simple carry-over");
+         "Test 5 failed: Simple carry-over");  // NOLINT
 
   deleteList(l1);
   deleteList(l2);

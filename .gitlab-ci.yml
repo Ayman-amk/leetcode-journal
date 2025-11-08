@@ -22,12 +22,14 @@ python-tests-3.9:
     - flake8 problems/ utils/ src/ --max-line-length=88 --extend-ignore=E203,W503
     - find problems -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
     - find problems -name "*.pyc" -delete 2>/dev/null || true
-    - python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || 
+    - |
+      python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || {
         for test_file in problems/*/python/test_solution.py; do
           if [ -f "$test_file" ]; then
             cd "$(dirname "$test_file")" && python -m pytest test_solution.py -v --tb=short && cd - > /dev/null
           fi
         done
+      }
     - python -m pytest problems/ --cov=problems --cov-report=term-missing --cov-report=html --import-mode=importlib -k "test" || true
   coverage: '/TOTAL.*\s+(\d+%)$/'
   artifacts:
@@ -53,12 +55,14 @@ python-tests-3.10:
     - flake8 problems/ utils/ src/ --max-line-length=88 --extend-ignore=E203,W503
     - find problems -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
     - find problems -name "*.pyc" -delete 2>/dev/null || true
-    - python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || 
+    - |
+      python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || {
         for test_file in problems/*/python/test_solution.py; do
           if [ -f "$test_file" ]; then
             cd "$(dirname "$test_file")" && python -m pytest test_solution.py -v --tb=short && cd - > /dev/null
           fi
         done
+      }
     - python -m pytest problems/ --cov=problems --cov-report=term-missing --cov-report=html --import-mode=importlib -k "test" || true
   coverage: '/TOTAL.*\s+(\d+%)$/'
   artifacts:
@@ -84,12 +88,14 @@ python-tests-3.11:
     - flake8 problems/ utils/ src/ --max-line-length=88 --extend-ignore=E203,W503
     - find problems -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
     - find problems -name "*.pyc" -delete 2>/dev/null || true
-    - python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || 
+    - |
+      python -m pytest problems/ -v --tb=short --import-mode=importlib -k "test" || {
         for test_file in problems/*/python/test_solution.py; do
           if [ -f "$test_file" ]; then
             cd "$(dirname "$test_file")" && python -m pytest test_solution.py -v --tb=short && cd - > /dev/null
           fi
         done
+      }
     - python -m pytest problems/ --cov=problems --cov-report=term-missing --cov-report=html --import-mode=importlib -k "test" || true
   coverage: '/TOTAL.*\s+(\d+%)$/'
   artifacts:
