@@ -1,0 +1,11 @@
+id: 1
+slug: two-sum
+difficulty: easy
+patterns: [hash-map, array, one-pass]
+languages: [cpp, python, js]
+status: solved
+tests: [cpp, python]
+performance_note: >
+  C++ implementation achieves O(n) time and O(n) space,
+  demonstrating efficient hash-map usage and strong memory control.
+last_update: 2025-11-08
