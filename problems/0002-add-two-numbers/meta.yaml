@@ -1,0 +1,12 @@
+id: 2
+slug: add-two-numbers
+difficulty: Medium
+patterns:
+  - Linked List
+  - Math
+languages:
+  - python
+  - cpp
+  - js
+status: completed
+last_update: '2025-11-08'

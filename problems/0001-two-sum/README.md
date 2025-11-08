@@ -39,9 +39,9 @@ allowing instant complement lookup in O(1).
 
 | Language       | File                                         | Tested | Notes                          |
 | -------------- | -------------------------------------------- | ------ | ------------------------------ |
-| **C++**        | [`cpp/solution.cpp`](./cpp/solution.cpp)     | ✅ Yes | Fast, memory-efficient         |
-| **Python**     | [`python/solution.py`](./python/solution.py) | ✅ Yes | Clear reference implementation |
-| **JavaScript** | [`js/solution.js`](./js/solution.js)         | ❌ No  | Optional extra reference       |
+| **C++**        | [`cpp/solution.cpp`](./cpp/solution.cpp)     | Yes | Fast, memory-efficient         |
+| **Python**     | [`python/solution.py`](./python/solution.py) | Yes | Clear reference implementation |
+| **JavaScript** | [`js/solution.js`](./js/solution.js)         | No  | Optional extra reference       |
 
 > **C++ and Python** versions include standalone test files demonstrating correctness.  
 > C++ uses `<cassert>` tests for performance and verification; Python uses `pytest`-style asserts.
@@ -66,4 +66,4 @@ allowing instant complement lookup in O(1).
 
 ---
 
-🗓 **Last Updated:** 2025-11-08
+**Last Updated:** 2025-11-08

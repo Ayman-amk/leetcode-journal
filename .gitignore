@@ -1,17 +1,71 @@
 # Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
 .venv/
 env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
 # C++
 *.exe
 *.out
 *.obj
 *.o
+*.a
+*.so
+*.dylib
+*.dll
+test
+
 # Node
 node_modules/
-# VS Code
-.vscode/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+# Note: .vscode/ is committed for shared workspace settings
+.idea/
+*.swp
+*.swo
+*~
+
 # OS
 .DS_Store
 Thumbs.db
+.DS_Store?
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.hypothesis/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Environment
+.env
+.env.local
+
