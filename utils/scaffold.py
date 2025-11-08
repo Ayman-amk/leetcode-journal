@@ -132,7 +132,7 @@ int main() {
 
 
 def main():
-    """Main entry point for the scaffold script."""
+    """Process command line arguments and create problem scaffold."""
     if len(sys.argv) != 2:
         print("Usage: python utils/scaffold.py <problem_id-slug>")
         sys.exit(1)
